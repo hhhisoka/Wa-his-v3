@@ -11,9 +11,9 @@ const formatNumber = (input) => {
 commands.add({
     name: ["group", "add", "kick", "promote", "demote", "resetlink", "linkgroup", "tagall", "hidetag", "totag", "delete"],
     command: ["group", "+member", "add", "-member", "kick", "+admin", "promote", "-admin", "demote", "resetlink", "linkgroup", "tagall", "hidetag", "totag", "delete"],
-    alias: ["linkgc","linkgrup","h","del","d"],
+    alias: ["linkgc", "linkgrup", "h", "del", "d"],
     category: "group",
-    desc: "Mengelola aksi grup seperti menambah/menghapus member, promosi/demosi admin, dan lainnya.",
+    desc: "Manage group actions like adding/removing members, promoting/demoting admins, and more.",
     admin: true,
     group: true,
     botAdmin: true,
@@ -24,13 +24,13 @@ commands.add({
             switch (m.command.toLowerCase()) {
                 case "add":
                 case "+member": {
-                    if (!target) return m.reply(`*Contoh :* ${m.prefix + m.command} 627384747758`)
+                    if (!target) return m.reply(`*Example:* ${m.prefix + m.command} 627384747758`)
                     const results = await sius.groupParticipantsUpdate(m.chat, [target], "add")
                     const statusMessages = {
-                        200: `Berhasil menambahkan @${target.split("@")[0]} ke grup!`,
-                        401: "Dia Memblokir Bot!",
-                        409: "Dia Sudah Join!",
-                        500: "Grup Penuh!"
+                        200: `Successfully added @${target.split("@")[0]} to the group!`,
+                        401: "They blocked the bot!",
+                        409: "They are already in the group!",
+                        500: "Group is full!"
                     }
 
                     for (const result of results) {
@@ -40,7 +40,7 @@ commands.add({
                         }
                         if (result.status === 408) {
                             const inviteCode = await getCachedInvite(sius, m.chat)
-                            await m.reply(`@${target.split("@")[0]} Baru-Baru Saja Keluar Dari Grup Ini!\n\n + Karena Target Private\n\nUndangan Akan Dikirimkan Ke\n-> wa.me/${target.replace(/\D/g, "")}\n + Melalui Jalur Pribadi`)
+                            await m.reply(`@${target.split("@")[0]} just left this group!\n\n+ Because the target is private\n\nAn invite will be sent to\n-> wa.me/${target.replace(/\D/g, "")}\n+ Via private chat`)
                             await sendPrivateInvite(sius, target, inviteCode, m)
                         } else if (result.status === 403) {
                             const { code, expiration } = result.content.content[0].attrs
@@ -50,13 +50,13 @@ commands.add({
                                 code,
                                 expiration,
                                 m.metadata.subject,
-                                `Admin: @${m.sender.split("@")[0]}\nMengundang anda ke group ini\nSilahkan masuk jika berkehendak🙇`,
+                                `Admin: @${m.sender.split("@")[0]}\nInvites you to join this group\nPlease join if you wish 🙇`,
                                 null,
                                 { mentions: [m.sender] }
                             )
-                            await m.reply(`@${target.split("@")[0]} Tidak Dapat Ditambahkan\n\n + Karena Target Private\n\nUndangan Akan Dikirimkan Ke\n-> wa.me/${target.replace(/\D/g, "")}\n + Melalui Jalur Pribadi`)
+                            await m.reply(`@${target.split("@")[0]} cannot be added\n\n+ Because the target is private\n\nAn invite will be sent to\n-> wa.me/${target.replace(/\D/g, "")}\n+ Via private chat`)
                         } else {
-                            await m.reply(`[×] Gagal Add User\nStatus : ${result.status}`)
+                            await m.reply(`[×] Failed to add user\nStatus: ${result.status}`)
                         }
                     }
                     break
@@ -64,24 +64,24 @@ commands.add({
 
                 case "kick":
                 case "-member": {
-                    if (!target) return m.reply(`Contoh: ${m.prefix + m.command} 623873621136`)
+                    if (!target) return m.reply(`Example: ${m.prefix + m.command} 623873621136`)
                     await sius.groupParticipantsUpdate(m.chat, [target], "remove")
                     break
                 }
 
                 case "promote":
                 case "+admin": {
-                    if (!target) return m.reply(`Contoh: ${m.prefix + m.command} 623873621136`)
+                    if (!target) return m.reply(`Example: ${m.prefix + m.command} 623873621136`)
                     await sius.groupParticipantsUpdate(m.chat, [target], "promote")
-                    await m.reply("[√] Berhasil")
+                    await m.reply("[√] Success")
                     break
                 }
 
                 case "demote":
                 case "-admin": {
-                    if (!target) return m.reply(`Contoh: ${m.prefix + m.command} 623873621136`)
+                    if (!target) return m.reply(`Example: ${m.prefix + m.command} 623873621136`)
                     await sius.groupParticipantsUpdate(m.chat, [target], "demote")
-                    await m.reply("[√] Berhasil")
+                    await m.reply("[√] Success")
                     break
                 }
 
@@ -89,17 +89,17 @@ commands.add({
                 case "grup": {
                     const setting = args[0]?.toLowerCase()
                     if (!["open", "close"].includes(setting)) {
-                        return m.reply(`Contoh penggunaan:\n${m.prefix}group open\n${m.prefix}group close`)
+                        return m.reply(`Usage example:\n${m.prefix}group open\n${m.prefix}group close`)
                     }
                     await sius.groupSettingUpdate(m.chat, setting === "open" ? "not_announcement" : "announcement")
-                    await m.reply(`Berhasil mengubah pengaturan grup menjadi *${setting === "open" ? "terbuka" : "tertutup"}*!`)
+                    await m.reply(`Successfully changed group setting to *${setting === "open" ? "open" : "closed"}*!`)
                     break
                 }
 
                 case "resetlink": {
                     await sius.groupRevokeInvite(m.chat)
                     groupInviteCache.delete(m.chat)
-                    await m.reply("[√] Berhasil mereset link undangan grup.")
+                    await m.reply("[√] Successfully reset the group invite link.")
                     break
                 }
 
@@ -117,7 +117,7 @@ commands.add({
                     text += m.metadata.participants
                         .map(p => `• @${p.id.split("@")[0]}`)
                         .join("\n")
-                    text += `\n\n○ Pesan: ${message}`
+                    text += `\n\n○ Message: ${message}`
                     await m.reply(text, {
                         mentions: m.metadata.participants.map(p => p.id)
                     })
@@ -134,7 +134,7 @@ commands.add({
                 }
 
                 case "totag": {
-                    if (!m.quoted) return m.reply(`[×] Reply pesan dengan caption *${m.prefix + m.command}*`)
+                    if (!m.quoted) return m.reply(`[×] Reply to a message with caption *${m.prefix + m.command}*`)
                     delete m.quoted.chat
                     await sius.sendMessage(m.chat, {
                         forward: m.quoted.fakeObj,
@@ -146,7 +146,7 @@ commands.add({
                 case "delete":
                 case "del":
                 case "d": {
-                    if (!m.quoted) return m.reply(`[×] Reply pesan dengan caption *${m.prefix + m.command}*`)
+                    if (!m.quoted) return m.reply(`[×] Reply to a message with caption *${m.prefix + m.command}*`)
                     await sius.sendMessage(m.chat, {
                         delete: {
                             remoteJid: m.chat,
@@ -160,7 +160,7 @@ commands.add({
                 }
 
                 default:
-                await m.reply("Perintah tidak dikenali!")
+                    await m.reply("Command not recognized!")
             }
         } catch (e) {
             sius.cantLoad(e)
@@ -180,10 +180,10 @@ async function getCachedInvite(sius, groupId) {
 async function sendPrivateInvite(sius, target, inviteCode, originalMsg) {
     try {
         await sius.sendMessage(target, {
-            text: `https://chat.whatsapp.com/${inviteCode}\n + ------------------------------------------------------\n\n + Admin: @${originalMsg.sender.split("@")[0]}\n + Mengundang anda ke group ini\nSilahkan masuk jika berkehendak🙇`,
+            text: `https://chat.whatsapp.com/${inviteCode}\n + ------------------------------------------------------\n\n + Admin: @${originalMsg.sender.split("@")[0]}\n + Invites you to join this group\nPlease join if you wish 🙇`,
             detectLink: true
         })
     } catch (err) {
-        await originalMsg.reply("Gagal Mengirim Undangan!")
+        await originalMsg.reply("Failed to send invite!")
     }
 }

@@ -2,19 +2,21 @@ commands.add({
     name: ["join"],
     command: ["join"],
     category: "owner",
-    desc: "Memasukkan bot ke dalam grup menggunakan tautan undangan.",
-    param: "<link undangan whatsapp>",
+    desc: "Make the bot join a group using a WhatsApp invite link.",
+    param: "<WhatsApp invite link>",
     owner: true,
     run: async ({ sius, m, args }) => {
         const text = args[0]
-        const i = `[×] Masukkan tautan grup yang valid!`
-        if (!text || !text.includes("chat.whatsapp.com/")) return m.reply(i)
+        const errorMsg = `[×] Please provide a valid group invite link!`
+        if (!text || !text.includes("chat.whatsapp.com/")) return m.reply(errorMsg)
+        
         const groupId = text.split("chat.whatsapp.com/")[1]?.split(" ")[0]
-        if (!groupId) return m.reply(i)
+        if (!groupId) return m.reply(errorMsg)
+        
         try {
             const result = await sius.groupAcceptInvite(groupId)
-            const pending = `[√] Permintaan bergabung sedang diproses oleh admin grup.`
-            m.reply(result ? config.mess.success : pending)
+            const pendingMsg = `[√] Join request is being processed by the group admin.`
+            m.reply(result ? config.mess.success : pendingMsg)
         } catch (err) {
             sius.cantLoad(err)
         }

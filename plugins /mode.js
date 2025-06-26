@@ -3,31 +3,34 @@ commands.add({
     command: ["mode"],
     category: "owner",
     owner: true,
-    run: async({ sius, m, args }) => {
-        let jud = await sius.decodeJid(sius.user.id)
-        let set = db.set[jud]
-		let mode = args[0]
-		if (mode && mode == "public") {
-		    sius.public = set.public = true
-			set.grouponly = false
-			set.privateonly = false
-			m.reply('*[√] Berhasil diubah ke mode public*')
-		} else if (mode && mode == "self") {
-			set.grouponly = false
-			set.privateonly = false
-			sius.public = set.public = false
-			m.reply("*[√] Berhasil diubah ke mode self")
-		} else if (mode && mode == "group") {
-			set.grouponly = true
-			set.privateonly = false
-			m.reply('*[√] Berhasil diubah ke mode group*')
-		} else if (mode && mode == "private") {
-			set.grouponly = false
-			set.privateonly = true
-			m.reply('*[√] Sukses change to private only*')
-		} else {
-		    m.reply("• Silahkan pilih mode bot dibawah ini!\n▢ self\n▢ group\n▢ private\n▢ public")
-		}
+    run: async ({ sius, m, args }) => {
+        let jid = await sius.decodeJid(sius.user.id)
+        let set = db.set[jid]
+        let mode = args[0]
+        
+        if (mode === "public") {
+            sius.public = set.public = true
+            set.grouponly = false
+            set.privateonly = false
+            m.reply("*[√] Successfully switched to public mode*")
+        } else if (mode === "self") {
+            set.grouponly = false
+            set.privateonly = false
+            sius.public = set.public = false
+            m.reply("*[√] Successfully switched to self mode*")
+        } else if (mode === "group") {
+            set.grouponly = true
+            set.privateonly = false
+            m.reply("*[√] Successfully switched to group-only mode*")
+        } else if (mode === "private") {
+            set.grouponly = false
+            set.privateonly = true
+            m.reply("*[√] Successfully switched to private-only mode*")
+        } else {
+            m.reply(
+                "• Please choose a valid bot mode below:\n▢ self\n▢ group\n▢ private\n▢ public"
+            )
+        }
     }
 })
 
@@ -36,15 +39,15 @@ commands.add({
     command: ["self"],
     category: "owner",
     owner: true,
-    run: async({ sius, m, args }) => {
-        let jud = await sius.decodeJid(sius.user.id)
-        let set = db.set[jud]
-		set.grouponly = false
-		set.privateonly = false
-		sius.public = false
-		set.public = false
-		m.reply("*[√] Berhasil diubah ke mode self*")
-	}
+    run: async ({ sius, m }) => {
+        let jid = await sius.decodeJid(sius.user.id)
+        let set = db.set[jid]
+        set.grouponly = false
+        set.privateonly = false
+        sius.public = false
+        set.public = false
+        m.reply("*[√] Successfully switched to self mode*")
+    }
 })
 
 commands.add({
@@ -52,15 +55,15 @@ commands.add({
     command: ["public"],
     category: "owner",
     owner: true,
-    run: async({ sius, m, args }) => {
-        let jud = await sius.decodeJid(sius.user.id)
-        let set = db.set[jud]
-		sius.public = true
-		set.public = true
-		set.grouponly = false
-		set.privateonly = false
-		m.reply('*[√] Berhasil diubah ke mode public*')
-	}
+    run: async ({ sius, m }) => {
+        let jid = await sius.decodeJid(sius.user.id)
+        let set = db.set[jid]
+        sius.public = true
+        set.public = true
+        set.grouponly = false
+        set.privateonly = false
+        m.reply("*[√] Successfully switched to public mode*")
+    }
 })
 
 commands.add({
@@ -69,13 +72,13 @@ commands.add({
     alias: ["gconly"],
     category: "owner",
     owner: true,
-    run: async({ sius, m, args }) => {
-        let jud = await sius.decodeJid(sius.user.id)
-        let set = db.set[jud]    
-    	set.grouponly = true
-		set.privateonly = false
-		m.reply('*[√] Berhasil diubah ke mode group*')
-	}
+    run: async ({ sius, m }) => {
+        let jid = await sius.decodeJid(sius.user.id)
+        let set = db.set[jid]
+        set.grouponly = true
+        set.privateonly = false
+        m.reply("*[√] Successfully switched to group-only mode*")
+    }
 })
 
 commands.add({
@@ -84,13 +87,13 @@ commands.add({
     alias: ["pconly"],
     category: "owner",
     owner: true,
-    run: async({ sius, m, args }) => {
-        let jud = await sius.decodeJid(sius.user.id)
-        let set = db.set[jud]    
-		set.grouponly = false
-		set.privateonly = true
-		m.reply('*[√] SukseS Change To Private Only*') 
-	}
+    run: async ({ sius, m }) => {
+        let jid = await sius.decodeJid(sius.user.id)
+        let set = db.set[jid]
+        set.grouponly = false
+        set.privateonly = true
+        m.reply("*[√] Successfully switched to private-only mode*")
+    }
 })
 
 commands.add({
@@ -98,9 +101,9 @@ commands.add({
     command: ["shutdown"],
     category: "owner",
     owner: true,
-    run: async({ m }) => {
-        m.reply(`*Process Shutdown...*`).then(() => {
-			process.exit(0)
-		})
-	}
+    run: async ({ m }) => {
+        m.reply("*[×] Shutting down...*").then(() => {
+            process.exit(0)
+        })
+    }
 })

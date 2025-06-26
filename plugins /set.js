@@ -1,85 +1,85 @@
 commands.add({
     name: ["setwelcome"],
     command: ["setwelcome"],
-    desc: "Set custom welcome message untuk grup",
+    desc: "Set a custom welcome message for the group",
     category: "group",
     admin: true,
     group: true,
     run: async ({ sius, m, args }) => {
-        if (!args.length) return m.reply("Masukkan teks welcome yang ingin diset!");
+        if (!args.length) return m.reply("Please provide the welcome text to set!");
         const text = args.join(" ");
         const id = m.chat;
         if (!db.groups[id]) db.groups[id] = {};
         db.groups[id].setwelcome = text;
-        m.reply(`[√] Welcome message berhasil disimpan:\n${text}`);
+        m.reply(`[√] Welcome message saved:\n${text}`);
     }
 });
 
 commands.add({
     name: ["setleave"],
     command: ["setleave"],
-    desc: "Set custom leave message untuk grup",
+    desc: "Set a custom leave message for the group",
     category: "group",
     admin: true,
     group: true,
     run: async ({ sius, m, args }) => {
-        if (!args.length) return m.reply("Masukkan teks leave yang ingin diset!");
+        if (!args.length) return m.reply("Please provide the leave text to set!");
         const text = args.join(" ");
         const id = m.chat;
         if (!db.groups[id]) db.groups[id] = {};
         db.groups[id].setleave = text;
-        m.reply(`[√] Leave message berhasil disimpan:\n${text}`);
+        m.reply(`[√] Leave message saved:\n${text}`);
     }
 });
 
 commands.add({
     name: ["setpromote"],
     command: ["setpromote"],
-    desc: "Set custom promote message untuk grup",
+    desc: "Set a custom promote message for the group",
     category: "group",
     admin: true,
     group: true,
     run: async ({ sius, m, args }) => {
-        if (!args.length) return m.reply("Masukkan teks promote yang ingin diset!");        
+        if (!args.length) return m.reply("Please provide the promote text to set!");
         const text = args.join(" ");
         const id = m.chat;
         if (!db.groups[id]) db.groups[id] = {};
         db.groups[id].setpromote = text;
-        m.reply(`[√] Promote message berhasil disimpan:\n${text}`);
+        m.reply(`[√] Promote message saved:\n${text}`);
     }
 });
 
 commands.add({
     name: ["setdemote"],
     command: ["setdemote"],
-    desc: "Set custom demote message untuk grup",
+    desc: "Set a custom demote message for the group",
     category: "group",
     admin: true,
     group: true,
     run: async ({ sius, m, args }) => {
-        if (!args.length) return m.reply("Masukkan teks demote yang ingin diset!");
+        if (!args.length) return m.reply("Please provide the demote text to set!");
         const text = args.join(" ");
         const id = m.chat;
         if (!db.groups[id]) db.groups[id] = {};
         db.groups[id].setdemote = text;
-        m.reply(`[√] Demote message berhasil disimpan:\n${text}`);
+        m.reply(`[√] Demote message saved:\n${text}`);
     }
 });
 
 commands.add({
     name: ["adminonly"],
     command: ["adminonly"],
-    description: "Aktifkan atau matikan mode admin only di grup",
+    description: "Enable or disable admin-only mode for the group",
     category: "group",
     group: true,
     admin: true,
     run: async ({ sius, m, args }) => {
-        const mode = args[0] && args[0].toLowerCase();
+        const mode = args[0]?.toLowerCase();
         if (!mode || !["on", "off"].includes(mode)) {
-            return m.reply("[×] Format salah! Pakai .adminonly on/off");
+            return m.reply("[×] Invalid format! Use .adminonly on/off");
         }
         if (!db.groups[m.chat]) db.groups[m.chat] = {};
         db.groups[m.chat].adminonly = mode === "on";
-        await m.reply(`[√] Mode admin only di grup ini sudah *${mode === "on" ? "diaktifkan" : "dinonaktifkan"}*.`);
+        await m.reply(`[√] Admin-only mode is now *${mode === "on" ? "enabled" : "disabled"}* in this group.`);
     }
 });

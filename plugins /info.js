@@ -5,14 +5,14 @@ commands.add({
     command: ["infogroup"],
     category: "group",
     alias: ["groupinfo"],
-    desc: "Menampilkan informasi tentang grup",
+    desc: "Display information about the group",
     group: true,
     run: async ({ sius, m, Func }) => {
         try {
             const groupMetadata = await sius.groupMetadata(m.chat);
             const participants = groupMetadata.participants;
-            const owner = groupMetadata.owner || "Tidak diketahui";
-            const createdAt = new Date(groupMetadata.creation * 1000).toLocaleString("id-ID", { timeZone: "Asia/Jakarta" });
+            const owner = groupMetadata.owner || "Unknown";
+            const createdAt = new Date(groupMetadata.creation * 1000).toLocaleString("en-US", { timeZone: "UTC" });
             let profile;
             try {
                 profile = await sius.profilePictureUrl(m.chat, "image");
@@ -21,13 +21,13 @@ commands.add({
             }
             const thumbnail = profile.startsWith("http") ? await (await Func.getBuffer(profile)) : fs.readFileSync(profile);
             const set = db.groups[m.chat] || {}
-            const infoMsg = `*▢ Nama Grup:* ${groupMetadata.subject}\n` +
-                `*▢ ID Grup:* ${groupMetadata.id}\n` +
-                `*▢ Dibuat Pada:* ${createdAt}\n` +
+            const infoMsg = `*▢ Group Name:* ${groupMetadata.subject}\n` +
+                `*▢ Group ID:* ${groupMetadata.id}\n` +
+                `*▢ Created On:* ${createdAt}\n` +
                 `*▢ Owner:* @${owner.split("@")[0]}\n` +
-                `*▢ Jumlah Member:* ${participants.length}\n` +
-                `*▢ Edit Info:* ${groupMetadata.restrict ? "Hanya Admin" : "Semua Member"}\n` +
-                `*▢ Kirim Pesan:* ${groupMetadata.announce ? "Hanya Admin" : "Semua Member"}\n` +
+                `*▢ Member Count:* ${participants.length}\n` +
+                `*▢ Edit Info:* ${groupMetadata.restrict ? "Admin Only" : "All Members"}\n` +
+                `*▢ Send Messages:* ${groupMetadata.announce ? "Admin Only" : "All Members"}\n` +
                 `*▢ Anti tagsw :* ${set.antitagsw ? "√" : "×"}\n` +
                 `*▢ Antilink :* ${set.antilink ? "√" : "×"}\n` +
                 `*▢ Anti virtex :* ${set.antivirtex ? "√" : "×"}\n` +
@@ -36,7 +36,7 @@ commands.add({
                 `*▢ Anti hidetag :* ${set.antihidetag ? "√" : "×"}\n` +
                 `*▢ Welcome :* ${set.welcome ? "√" : "×"}\n` +
                 `*▢ Nsfw :* ${set.nsfw ? "√" : "×"}\n` +
-                `*▢ Deskripsi:* ${groupMetadata.desc || "Tidak ada deskripsi"}\n`;
+                `*▢ Description:* ${groupMetadata.desc || "No description"}\n`;
             await m.reply(infoMsg, {
                 contextInfo: {
                     externalAdReply: {
@@ -49,7 +49,7 @@ commands.add({
                     },
                     mentionedJid: [owner]
                 }
-            })            
+            })
         } catch (err) {
             sius.cantLoad(err);
         }

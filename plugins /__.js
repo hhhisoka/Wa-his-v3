@@ -7,22 +7,22 @@ commands.add({
     admin: true,
     group: true,
     botAdmin: true,
-    desc: "Mengaktifkan/menonaktifkan antilink grup",
-    run: async({ sius, m, args }) => {
+    desc: "Enable/disable group antilink",
+    run: async ({ sius, m, args }) => {
         const set = db.groups[m.chat]
         if (/on|true/i.test(args[0])) {
-            if (set.antilink) return m.reply("*Sudah Aktif Sebelumnya*")
+            if (set.antilink) return m.reply("*Already Active Previously*")
             set.antilink = true
-            m.reply("*Berhasil diaktifkan !!*")
+            m.reply("*Successfully activated !!*")
         } else if (/off|false/i.test(args[0])) {
             set.antilink = false
-            m.reply("*Berhasil dinonaktifkan !!*")
+            m.reply("*Successfully deactivated !!*")
         } else sius.sendButton(m.chat, [
-            ["On",".antilink on"],
-            ["Off",".antilink off"]
+            ["On", ".antilink on"],
+            ["Off", ".antilink off"]
         ], {
-            text: "*Silahkan pilih opsi di bawah*\n\n> On: Mengaktifkan\n> Off: Menonaktifkan", 
-            quoted: m 
+            text: "*Please choose an option below*\n\n> On: Enable\n> Off: Disable",
+            quoted: m
         })
     }
 })
@@ -36,22 +36,22 @@ commands.add({
     admin: true,
     group: true,
     botAdmin: true,
-    desc: "Mengaktifkan/menonaktifkan antivirtex grup",
-    run: async({ sius, m, args }) => {
+    desc: "Enable/disable group antivirtex",
+    run: async ({ sius, m, args }) => {
         const set = db.groups[m.chat]
         if (/on|true/i.test(args[0])) {
-            if (set.antivirtex) return m.reply("*Sudah Aktif Sebelumnya*")
+            if (set.antivirtex) return m.reply("*Already Active Previously*")
             set.antivirtex = true
-            m.reply("*Berhasil diaktifkan !!*")
+            m.reply("*Successfully activated !!*")
         } else if (/off|false/i.test(args[0])) {
             set.antivirtex = false
-            m.reply("*Berhasil dinonaktifkan !!*")
+            m.reply("*Successfully deactivated !!*")
         } else sius.sendButton(m.chat, [
-            ["On",".antivirtex on"],
-            ["Off",".antivirtex off"]
+            ["On", ".antivirtex on"],
+            ["Off", ".antivirtex off"]
         ], {
-            text: "*Silahkan pilih opsi di bawah*\n\n> On: Mengaktifkan\n> Off: Menonaktifkan", 
-            quoted: m 
+            text: "*Please choose an option below*\n\n> On: Enable\n> Off: Disable",
+            quoted: m
         })
     }
 })
@@ -64,22 +64,22 @@ commands.add({
     admin: true,
     group: true,
     botAdmin: true,
-    desc: "Mengaktifkan/menonaktifkan antidelete grup",
-    run: async({ sius, m, args }) => {
+    desc: "Enable/disable group antidelete",
+    run: async ({ sius, m, args }) => {
         const set = db.groups[m.chat]
         if (/on|true/i.test(args[0])) {
-            if (set.antidelete) return m.reply("*Sudah Aktif Sebelumnya*")
+            if (set.antidelete) return m.reply("*Already Active Previously*")
             set.antidelete = true
-            m.reply("*Berhasil diaktifkan !!*")
+            m.reply("*Successfully activated !!*")
         } else if (/off|false/i.test(args[0])) {
             set.antidelete = false
-            m.reply("*Berhasil dinonaktifkan !!*")
+            m.reply("*Successfully deactivated !!*")
         } else sius.sendButton(m.chat, [
-            ["On",".antidelete on"],
-            ["Off",".antidelete off"]
+            ["On", ".antidelete on"],
+            ["Off", ".antidelete off"]
         ], {
-            text: "*Silahkan pilih opsi di bawah*\n\n> On: Mengaktifkan\n> Off: Menonaktifkan", 
-            quoted: m 
+            text: "*Please choose an option below*\n\n> On: Enable\n> Off: Disable",
+            quoted: m
         })
     }
 })
@@ -92,81 +92,27 @@ commands.add({
     admin: true,
     group: true,
     botAdmin: true,
-    desc: "Mengaktifkan/menonaktifkan welcome grup",
-    run: async({ sius, m, args }) => {
+    desc: "Enable/disable group welcome",
+    run: async ({ sius, m, args }) => {
         const set = db.groups[m.chat]
         if (/on|true/i.test(args[0])) {
-            if (set.welcome) return m.reply("*Sudah Aktif Sebelumnya*")
+            if (set.welcome) return m.reply("*Already Active Previously*")
             set.welcome = true
-            m.reply("*Berhasil diaktifkan !!*")
+            m.reply("*Successfully activated !!*")
         } else if (/off|false/i.test(args[0])) {
             set.welcome = false
-            m.reply("*Berhasil dinonaktifkan !!*")
+            m.reply("*Successfully deactivated !!*")
         } else sius.sendButton(m.chat, [
-            ["On",".welcome on"],
-            ["Off",".welcome off"]
+            ["On", ".welcome on"],
+            ["Off", ".welcome off"]
         ], {
-            text: "*Silahkan pilih opsi di bawah*\n\n> On: Mengaktifkan\n> Off: Menonaktifkan", 
-            quoted: m 
+            text: "*Please choose an option below*\n\n> On: Enable\n> Off: Disable",
+            quoted: m
         })
     }
 })
 
-commands.add({
-    name: ["antitoxic"],
-    command: ["antitoxic"],
-    category: "group",
-    param: "<on/off>",
-    admin: true,
-    group: true,
-    botAdmin: true,
-    desc: "Mengaktifkan/menonaktifkan antitoxic grup",
-    run: async({ sius, m, args }) => {
-        const set = db.groups[m.chat]
-        if (/on|true/i.test(args[0])) {
-            if (set.antitoxic) return m.reply("*Sudah Aktif Sebelumnya*")
-            set.antitoxic = true
-            m.reply("*Berhasil diaktifkan !!*")
-        } else if (/off|false/i.test(args[0])) {
-            set.antitoxic = false
-            m.reply("*Berhasil dinonaktifkan !!*")
-        } else sius.sendButton(m.chat, [
-            ["On",".antitoxic on"],
-            ["Off",".antitoxic off"]
-        ], {
-            text: "*Silahkan pilih opsi di bawah*\n\n> On: Mengaktifkan\n> Off: Menonaktifkan", 
-            quoted: m 
-        })
-    }
-})
 
-commands.add({
-    name: ["nsfw"],
-    command: ["nsfw"],
-    category: "group",
-    param: "<on/off>",
-    admin: true,
-    group: true,
-    botAdmin: true,
-    desc: "Mengaktifkan/menonaktifkan nsfw grup",
-    run: async({ sius, m, args }) => {
-        const set = db.groups[m.chat]
-        if (/on|true/i.test(args[0])) {
-            if (set.nsfw) return m.reply("*Sudah Aktif Sebelumnya*")
-            set.nsfw = true
-            m.reply("*Berhasil diaktifkan !!*")
-        } else if (/off|false/i.test(args[0])) {
-            set.nsfw = false
-            m.reply("*Berhasil dinonaktifkan !!*")
-        } else sius.sendButton(m.chat, [
-            ["On",".nsfw on"],
-            ["Off",".nsfw off"]
-        ], {
-            text: "*Silahkan pilih opsi di bawah*\n\n> On: Mengaktifkan\n> Off: Menonaktifkan", 
-            quoted: m 
-        })
-    }
-})
 
 commands.add({
     name: ["antihidetag"],
@@ -176,22 +122,22 @@ commands.add({
     admin: true,
     group: true,
     botAdmin: true,
-    desc: "Mengaktifkan/menonaktifkan antihidetag grup",
-    run: async({ sius, m, args }) => {
+    desc: "Enable/disable group antihidetag",
+    run: async ({ sius, m, args }) => {
         const set = db.groups[m.chat]
         if (/on|true/i.test(args[0])) {
-            if (set.antihidetag) return m.reply("*Sudah Aktif Sebelumnya*")
+            if (set.antihidetag) return m.reply("*Already Active Previously*")
             set.antihidetag = true
-            m.reply("*Berhasil diaktifkan !!*")
+            m.reply("*Successfully activated !!*")
         } else if (/off|false/i.test(args[0])) {
             set.antihidetag = false
-            m.reply("*Berhasil dinonaktifkan !!*")
+            m.reply("*Successfully deactivated !!*")
         } else sius.sendButton(m.chat, [
-            ["On",".antihidetag on"],
-            ["Off",".antihidetag off"]
+            ["On", ".antihidetag on"],
+            ["Off", ".antihidetag off"]
         ], {
-            text: "*Silahkan pilih opsi di bawah*\n\n> On: Mengaktifkan\n> Off: Menonaktifkan", 
-            quoted: m 
+            text: "*Please choose an option below*\n\n> On: Enable\n> Off: Disable",
+            quoted: m
         })
     }
 })
@@ -204,22 +150,22 @@ commands.add({
     admin: true,
     group: true,
     botAdmin: true,
-    desc: "Mengaktifkan/menonaktifkan antitagsw grup",
-    run: async({ sius, m, args }) => {
+    desc: "Enable/disable group antitagsw",
+    run: async ({ sius, m, args }) => {
         const set = db.groups[m.chat]
         if (/on|true/i.test(args[0])) {
-            if (set.antitagsw) return m.reply("*Sudah Aktif Sebelumnya*")
+            if (set.antitagsw) return m.reply("*Already Active Previously*")
             set.antitagsw = true
-            m.reply("*Berhasil diaktifkan !!*")
+            m.reply("*Successfully activated !!*")
         } else if (/off|false/i.test(args[0])) {
             set.antitagsw = false
-            m.reply("*Berhasil dinonaktifkan !!*")
+            m.reply("*Successfully deactivated !!*")
         } else sius.sendButton(m.chat, [
-            ["On",".antitagsw on"],
-            ["Off",".antitagsw off"]
+            ["On", ".antitagsw on"],
+            ["Off", ".antitagsw off"]
         ], {
-            text: "*Silahkan pilih opsi di bawah*\n\n> On: Mengaktifkan\n> Off: Menonaktifkan", 
-            quoted: m 
+            text: "*Please choose an option below*\n\n> On: Enable\n> Off: Disable",
+            quoted: m
         })
     }
 })

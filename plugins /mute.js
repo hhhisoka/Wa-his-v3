@@ -4,16 +4,16 @@ commands.add({
     category: "owner",
     owner: true,
     group: true,
-    desc: "Mute terhadap group tertentu",
-    run: async ({ sius, m, args, Func }) => {
+    desc: "Mute the bot in a specific group.",
+    run: async ({ sius, m }) => {
         try {
             db.groups[m.chat].mute = true
-			m.reply("[√] Bot telah di mute di grup ini!")
+            m.reply("[√] The bot has been muted in this group!")
         } catch (e) {
             sius.cantLoad(e)
         }
     }
-});
+})
 
 commands.add({
     name: ["unmute"],
@@ -21,13 +21,13 @@ commands.add({
     category: "owner",
     owner: true,
     group: true,
-    desc: "Menghilangkan mute terhadap group tertentu",
-    run: async ({ sius, m, args, Func }) => {
+    desc: "Unmute the bot in a specific group.",
+    run: async ({ sius, m }) => {
         try {
             db.groups[m.chat].mute = false
-			m.reply("[√] Sukses unmute!")
+            m.reply("[√] Successfully unmuted!")
         } catch (e) {
             sius.cantLoad(e)
         }
     }
-});
+})
