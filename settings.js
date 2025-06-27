@@ -15,11 +15,8 @@ export default {
         reply: "https://i.pinimg.com/originals/20/15/4a/20154a72a9b841345cb3f7ad8ba8683a.jpg",
         menu: "https://i.pinimg.com/originals/12/dc/75/12dc75a31c9a57d28aec3b08ff2196b6.png"
     },
-    limit: {
-        free: 20,
-        premium: 999,
-        vip: 9999
-    },
+    
+    
     github: "https://github.com/hhhisoka",
     instagram: "https://instagram.com/",
     
