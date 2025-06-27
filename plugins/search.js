@@ -4,19 +4,23 @@ commands.add({
     category: "anime",
     alias: ["anisearch", "animelookup"],
     usage: "<title>",
-    desc: "Mencari anime di Otakudesu berdasarkan nama!",
+    desc: "Search anime on Otakudesu by title!",
     limit: 8,
     query: true,
     example: "Shingeki no Kyojin",
     run: async ({ sius, m, text, Func }) => {
-        //m.reply({ react: { text: "🕣", key: m.key }})
+        // await m.reply({ react: { text: "🕣", key: m.key } }) // optional reaction
+        
         const apiUrl = `https://api.siputzx.my.id/api/anime/otakudesu/search?s=${encodeURIComponent(text)}`;
         const result = await Func.fetchJson(apiUrl);
+        
         if (!result || !result.status || !result.data || result.data.length === 0) {
-            return m.reply(`⚠️ Tidak ditemukan anime untuk judul "${text}". Coba judul lain!`);
+            return m.reply(`⚠️ No anime found for the title "${text}". Try another title!`);
         }
+        
         const items = result.data.slice(0, 10);
-        const caption = `*[√] Hasil pencarian untuk "${text}":*\n\nMenampilkan ${items.length} anime dari Otakudesu.`;         
+        const caption = `*[√] Search results for "${text}":*\n\nShowing ${items.length} anime from Otakudesu.`;
+        
         const cards = items.map((item, index) => ({
             header: {
                 image: item.imageUrl || 'https://via.placeholder.com/150'
@@ -28,13 +32,14 @@ commands.add({
                 buttons: [{
                     name: "cta_url",
                     buttonParamsJson: JSON.stringify({
-                        display_text: "Lihat di Otakudesu",
+                        display_text: "View on Otakudesu",
                         url: item.link
                     })
                 }]
             }
         }));
-        sius.sendCarousel(m.chat, caption, cards, m);
-        //m.reply({ react: { text: "", key: m.key }})
+        
+        await sius.sendCarousel(m.chat, caption, cards, m);
+        // await m.reply({ react: { text: "", key: m.key } }) // optional reaction
     }
-})
+});
