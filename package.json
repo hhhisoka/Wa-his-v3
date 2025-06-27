@@ -1,6 +1,6 @@
 {
-    "name": "Itsuki-Bot",
-    "version": "4.0.0",
+    "name": "Wa-his-v3",
+    "version": "1.0.0",
     "description": "Simple Base WhatsApp Bot",
     "main": "index.js",
     "type": "module",
@@ -15,7 +15,7 @@
         "bot-wa",
         "multi-device"
     ],
-    "author": "siuspsrb(hyzer)",
+    "author": "hhhisoka",
     "license": "MIT",
     "directories": "source/system",
     "engines": {
