@@ -6,8 +6,8 @@
     "type": "module",
     "scripts": {
         "start": "node index.js",
-        "dev": "nodemon index.js",
-        "debug": "DEBUG=* node start.js"
+        "dev": "nodemon index.js"
+
     },
     "keywords": [
         "whatsapp-bot",
@@ -74,10 +74,10 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/siuspsrb/Itsuki-Bot.git"
+        "url": "git+https://github.com/hhhisoka/Wa-his-v3"
     },
     "bugs": {
-        "url": "https://github.com/siuspsrb/Itsuki-Bot/issues"
+        "url": "https://github.com/hhhisoka/Wa-his-v3/issues"
     },
-    "homepage": "https://github.com/siuspsrb/Itsuki-Bot#readme"
+    "homepage": "https://github.com/hhhisoka/Wa-his-v3"
 }

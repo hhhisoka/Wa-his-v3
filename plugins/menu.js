@@ -446,9 +446,9 @@ commands.add({
 
             // Emojis pour les catégories
             const categoryEmojis = {
-                'info': '📋', 'fun': '🎮', 'download': '⬇️', 'tools': '🛠️',
-                'admin': '👑', 'owner': '⚡', 'group': '👥', 'nsfw': '🔞',
-                'sticker': '🎭', 'ai': '🤖', 'game': '🎯', 'internet': '🌐',
+                'info': '📋', 'download': '⬇️', 'tools': '🛠️',
+                'admin': '👑', 'owner': '⚡', 'group': '👥', 
+                'sticker': '🎭', 'internet': '🌐',
                 'music': '🎵', 'image': '🖼️', 'text': '📝', 'converter': '🔄',
                 'search': '🔍'
             };
@@ -519,7 +519,7 @@ commands.add({
                 title: `📖 Menu Complet - ${config.bot.name}`,
                 thumb: config.thumb.menu,
                 render: true,
-                txt: `🤖 ${config.bot.name} Assistant`,
+                txt: `🤖 ${config.bot.name} A.ssistant`,
                 body: `${totalCommands} commandes • ${categoriesCount} catégories`
             });
 
